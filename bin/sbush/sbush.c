@@ -71,6 +71,24 @@ int exec_binary(char *arguments[], int num_args, char *envp[]) {
     bin[i++] = '/';
     bin[i] = '\0';
     strcat(bin, arguments[0]);
+    char cdir[BUF_SIZE];
+    char len = strlen(arguments[1]);
+    if (arguments[1][0] == '/') {
+        int i;
+        for (i = 1; i < len; i++) {
+            arguments[1][i - 1] = arguments[1][i];
+        }
+        arguments[1][i - 1] = '\0';
+    }
+    else {
+        getcwd(cdir, BUF_SIZE);
+        strcat(cdir, arguments[1]);
+        int i = 0;
+        for (i = 0; i < strlen(cdir); i++) {
+            arguments[1][i] = cdir[i];
+        }
+        arguments[1][i] = '\0';
+    }
     pid_t c_pid = fork();
     if (c_pid == 0) {
         execvpe(bin, arguments, envp);
@@ -127,7 +145,6 @@ int cd(char *arguments[], int num_args, char *envp[]) {
         else {
             char cdir[BUF_SIZE];
             getcwd(cdir, BUF_SIZE);
-            strcat(cdir, "/");
             strcat(cdir, arguments[1]);
             status = chdir(cdir);
         }
@@ -191,7 +208,7 @@ int shell_execfile(char *filename, char *envp[]) {
     char *line_read[MAX_LINES];
     int num_lines = parse_split(line_read, script_file, '\n');
     for (int i = 0; i < num_lines; i++) {
-        if (line_read[i][0] != '#' && line_read[i][1] != '!' && (int) strlen(line_read[i]) != 0) {
+        if (line_read[i][0] != '#' && line_read[i][1] != '!' && strlen(line_read[i]) != 0) {
             shell_parse(line_read[i], (int) strlen(line_read[i]), envp);
         }
     }
