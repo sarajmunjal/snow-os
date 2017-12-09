@@ -1,4 +1,4 @@
-SBUNIX: CSE 506 Project
+SBUNIX (SNOW OS): CSE 506 Project
 -----------------------
 Cooperative multi-tasking w/ all functional requirements (50 points)
 
@@ -60,6 +60,7 @@ Example files:
 --------------
 Under the rootfs/etc/ folder, the following test files can be found:
 
+-- test: test directory for cd
 -- test.txt: simple text file for cat
 -- test.sbush: simple sbush script
 -- stress_test.sbush: stress test sbush script with 60+ commands to spawn 60+ processes, system remains stable

@@ -249,7 +249,7 @@ int shell_init(char* envp[]) {
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-    char *welcome_msg = "Welcome to SBUNIX!\n\nPlease use the project README file for a list of commands.\n\nA few examples are:\nls\ncat etc/test.txt\n./etc/test.sbush\nps\n\n";
+    char *welcome_msg = "Welcome to SBUNIX (SNOW OS)!\n\nPlease use the project README file for a list of commands.\n\nA few examples are:\nls\ncat etc/test.txt\n./etc/test.sbush\nps\n\n";
     write(STDOUT, welcome_msg, strlen(welcome_msg));
     if (argc == 2) {
         shell_execfile(argv[1], envp);
