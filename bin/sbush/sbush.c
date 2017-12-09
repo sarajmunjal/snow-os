@@ -256,8 +256,7 @@ int shell_init(char* envp[]) {
                 continue;
             }
             else if (strcmp(input, "exit") == 0) {
-                char *exit_msg = "Shell will not be excited since it is the primary process, and exiting it will shutdown the system.\n";
-                write(STDOUT, exit_msg, strlen(exit_msg));
+                continue;
             }
             else if (input[0] == '.' && input[1] == '/') {
                 shell_execfile(&input[2], envp);

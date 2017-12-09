@@ -613,7 +613,7 @@ void kill_process(kthread_t *process) {
     }
     current_process->state = ZOMBIE;
     shallow_cleanup(current_process);
-    kprintf("[1]+ Done %s: %d\n", current_process->process_name, current_process->pid);
+    kprintf("[1]+ Done (exited) %s: %d\n", current_process->process_name, current_process->pid);
     // cleanup happens in page tables
 }
 
