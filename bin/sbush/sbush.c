@@ -71,23 +71,25 @@ int exec_binary(char *arguments[], int num_args, char *envp[]) {
     bin[i++] = '/';
     bin[i] = '\0';
     strcat(bin, arguments[0]);
-    char cdir[BUF_SIZE];
-    char len = strlen(arguments[1]);
-    if (arguments[1][0] == '/') {
-        int i;
-        for (i = 1; i < len; i++) {
-            arguments[1][i - 1] = arguments[1][i];
+    if (arguments[1] != 0) {
+        char cdir[BUF_SIZE];
+        char len = strlen(arguments[1]);
+        if (arguments[1][0] == '/') {
+            int i;
+            for (i = 1; i < len; i++) {
+                arguments[1][i - 1] = arguments[1][i];
+            }
+            arguments[1][i - 1] = '\0';
         }
-        arguments[1][i - 1] = '\0';
-    }
-    else {
-        getcwd(cdir, BUF_SIZE);
-        strcat(cdir, arguments[1]);
-        int i = 0;
-        for (i = 0; i < strlen(cdir); i++) {
-            arguments[1][i] = cdir[i];
+        else {
+            getcwd(cdir, BUF_SIZE);
+            strcat(cdir, arguments[1]);
+            int i = 0;
+            for (i = 0; i < strlen(cdir); i++) {
+                arguments[1][i] = cdir[i];
+            }
+            arguments[1][i] = '\0';
         }
-        arguments[1][i] = '\0';
     }
     pid_t c_pid = fork();
     if (c_pid == 0) {
@@ -197,6 +199,7 @@ int shell_parse(char *input, int len_input, char *envp[]) {
 }
 
 int shell_execfile(char *filename, char *envp[]) {
+    if (filename[0] == '/') filename++;
     int fp = open(filename, 0);
     if (fp < 0) {
         char *err_msg = "File not found\n";
@@ -266,7 +269,7 @@ int shell_init(char* envp[]) {
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-    char *welcome_msg = "Welcome to SBUNIX (SNOW OS)!\n\nPlease use the project README file for a list of commands.\n\nA few examples are:\nls\ncat etc/test.txt\n./etc/test.sbush\nps\n\n";
+    char *welcome_msg = "Welcome to SBUNIX (SNOW OS)!\n\nPlease use the project README file for a list of commands.\n\nA few examples are:\nls\ncat /etc/test.txt\nsbush /etc/test.sbush\nps\n\n";
     write(STDOUT, welcome_msg, strlen(welcome_msg));
     if (argc == 2) {
         shell_execfile(argv[1], envp);

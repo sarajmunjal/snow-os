@@ -48,10 +48,10 @@ qemu-system-x86_64 -curses -drive id=boot,format=raw,file=$USER.img,if=none -dri
 Examples:
 ---------
 ls
-cat etc/test.txt
-./etc/test.sbush
-sbush etc/test.sbush
-ls etc
+cat /etc/test.txt
+.//etc/test.sbush
+sbush /etc/test.sbush
+ls /etc
 ps
 echo hello
 export PS1=SHELL
