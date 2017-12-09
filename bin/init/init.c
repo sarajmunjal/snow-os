@@ -53,7 +53,7 @@ int launch_process(char *process_name, char *envp[]) {
         exit(0);
     }
     else {
-        wait(NULL);
+        while(1) yield();
     }
     return 0;
 }
@@ -81,8 +81,6 @@ int shell_execfile(char *filename, char *envp[]) {
 }
 
 int main(int argc, char *argv[], char *envp[]) {
-    while (1) {
-        shell_execfile("/etc/rc", envp);
-    }
+    shell_execfile("/etc/rc", envp);
     return 0;
 }

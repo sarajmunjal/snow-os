@@ -588,7 +588,7 @@ void reap_process(kthread_t *process) {
     prev->next = process->next;
     clean_page_tables(process->cr3);
     processes[process->pid] = 0;
-    // kprintf("[+1] Reaped process %s with pid %d\n", process->process_name, process->pid);
+    // kprintf("[1]+ Reaped process %s with pid %d\n", process->process_name, process->pid);
     kfree(process);
     // remove from list
     // deep clean
@@ -651,7 +651,7 @@ int kill_kern(int pid) {
         kprintf("No process exists with pid: %d\n", pid);
         return -1;
     }
-    kprintf("[+1] Killed process %s with pid %d\n", current_process->process_name, current_process->pid);
+    kprintf("[1]+ Done %s with pid %d\n", current_process->process_name, current_process->pid);
     kill_process(it);
     return 0;
 }
