@@ -71,7 +71,7 @@ int exec_binary(char *arguments[], int num_args, char *envp[]) {
     bin[i++] = '/';
     bin[i] = '\0';
     strcat(bin, arguments[0]);
-    if ((arguments[0] == "cat" || arguments[0] == "ls") && arguments[1] != 0) {
+    if ((strcmp(arguments[0], "cat") == 0 || strcmp(arguments[0], "ls") == 0) && arguments[1] != 0) {
         char cdir[BUF_SIZE];
         char len = strlen(arguments[1]);
         if (arguments[1][0] == '/') {
