@@ -18,6 +18,7 @@ kprintf, IDT, keyboard, timer
 Auto growing stack and dynamic heap allocation
 Shell with PATH, PS1, cd, and &
 Script handling with shebang (#!)
+bin/init user process to launch shell using /etc/rc
 Reaper/Idle process to cleanup zombie processes
 Reused PIDs
 Background processes: (for cooperative scheduling, background process are added to the scheduling queue and are executed when the parent process yield)
@@ -108,4 +109,3 @@ JamesM's kernel development tutorials (http://www.jamesmolloy.co.uk/tutorial_htm
 Known Limitations
 ----------------------
 1. .. and . is not handled in chdir syscall.
-2. bin/init process is not used (optional).
