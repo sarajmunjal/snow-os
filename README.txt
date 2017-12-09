@@ -21,6 +21,7 @@ Script handling with shebang (#!)
 bin/init user process to launch shell using /etc/rc
 Reaper/Idle process to cleanup zombie processes
 Reused PIDs
+Binaries implemented: init, echo, sleep, cat, ls, kill -9, ps
 Background processes: (for cooperative scheduling, background process are added to the scheduling queue and are executed when the parent process yield)
 
 
