@@ -102,12 +102,14 @@ int exec_binary(char *arguments[], int num_args, char *envp[]) {
         if (is_background == 0) {
             waitpid(c_pid, NULL);
         }
-        char *back_start = "[1] ";
-        write(STDOUT, back_start, strlen(back_start));
-        char pid_s[20];
-        itoa_cl(pid_s, c_pid);
-        write(STDOUT, pid_s, strlen(pid_s));
-        write(STDOUT, "\n", 1);
+        else {
+            char *back_start = "[1] ";
+            write(STDOUT, back_start, strlen(back_start));
+            char pid_s[20];
+            itoa_cl(pid_s, c_pid);
+            write(STDOUT, pid_s, strlen(pid_s));
+            write(STDOUT, "\n", 1);
+        }
     }
     return 0;
 }

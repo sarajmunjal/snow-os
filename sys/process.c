@@ -613,6 +613,7 @@ void kill_process(kthread_t *process) {
     }
     current_process->state = ZOMBIE;
     shallow_cleanup(current_process);
+    kprintf("[1]+ Done %s: %d\n", current_process->process_name, current_process->pid);
     // cleanup happens in page tables
 }
 
@@ -651,7 +652,6 @@ int kill_kern(int pid) {
         kprintf("No process exists with pid: %d\n", pid);
         return -1;
     }
-    kprintf("[1]+ Done %s with pid %d\n", current_process->process_name, current_process->pid);
     kill_process(it);
     return 0;
 }
